@@ -1,0 +1,67 @@
+Telegram reader log file
+telegram read at 2009年06月23日13:35:36
+
+.FILETYPE Balise_Telegrams
+.TGML 3E AD 0D DD 37 0C 02 C4 2F 3A AD 08 65 9C D3 AE 
+AE 47 03 34 27 2F CA F8 8B 99 7A 27 08 3F 8F 77 
+A2 27 CA 33 2B 46 A4 85 04 EC 9F 81 C1 17 B8 40 
+89 39 7A 36 91 EB 94 B5 2A F0 4D D8 84 B7 AF 31 
+88 8F 0E 92 E9 4B 18 D7 D5 6C CF 15 45 74 7E 1F 
+B6 1F 79 21 E5 35 30 BA 53 2C 73 68 47 E1 A0 EB 
+11 90 B0 0D 4F DE 83 06 68 12 1A D5 E7 AE 2A 82 
+64 8B 10 15 59 25 DD 42 11 8A 05 12 36 40 60 CA 
+
+.FILETYPE User_Data
+.DATAL 90 02 7F BB 00 33 45 50 63 20 00 02 06 00 5C 07 
+01 30 03 02 5B 02 03 00 02 03 49 04 02 70 06 84 
+80 30 FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FC 
+
+Extracting telegrams
+Header balise telegram
+Q_UPDOWN   1 (1)
+M_VERSION  16 (10)
+Q_MEDIA    0 (0)
+N_PIG      0 (0)
+N_TOTAL    1 (1)
+M_DUP      0 (0)
+M_MCOUNT   255 (FF)
+NID_C      472 (1D8)
+    大区编号:59 (3B); 分区编号:0 (0)
+NID_BG     102 (0066)
+    车站编号:0 (00); 应答器编号:102 (66)
+Q_LINK     1 (1)
+	NID_PACKET         : 21 线路坡度
+	Q_DIR              : 1 (1)
+	L_PACKET           : 198 (00C6)
+	Q_SCALE            : 1 (1)
+	D_GRADIENT         : 0 (0000)
+	Q_GDIR             : 0 (0)
+	G_A                : 16 (10)
+	N_ITER             : 6 (06)
+	D_GRADIENT         : 46 (002E)
+	Q_GDIR             : 0 (0)
+	G_A                : 7 (07)
+	D_GRADIENT         : 152 (0098)
+	Q_GDIR             : 0 (0)
+	G_A                : 3 (03)
+	D_GRADIENT         : 301 (012D)
+	Q_GDIR             : 1 (1)
+	G_A                : 2 (02)
+	D_GRADIENT         : 384 (0180)
+	Q_GDIR             : 0 (0)
+	G_A                : 2 (02)
+	D_GRADIENT         : 420 (01A4)
+	Q_GDIR             : 1 (1)
+	G_A                : 4 (04)
+	D_GRADIENT         : 312 (0138)
+	Q_GDIR             : 0 (0)
+	G_A                : 6 (06)
+	NID_PACKET         : 132 调车危险
+	Q_DIR              : 2 (2)
+	L_PACKET           : 24 (0018)
+	Q_ASPECT           : 0 (0)
+FF: END TELEGRAM

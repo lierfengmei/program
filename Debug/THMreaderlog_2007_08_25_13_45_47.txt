@@ -1,0 +1,43 @@
+THM(Maintenance History Table) Data of Buffer Transfer Messages reader log file
+-------------------------
+Status Output File
+-------------------------
+Uploading of : -> THM 2007Äê08ÔÂ25ÈÕ13:45:47
+
+08 00 01 00 02 00 00 00 08 00 00 00 00 00 7A 0B 
+00 00 00 00 00 00 CA C9 E5 44 00 00 00 00 CA C9 
+E5 44 24 44 44 44 00 01 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 00 00 CA C9 
+E5 44 24 44 44 44 00 07 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 00 57 CA C9 
+E5 44 24 44 44 44 04 00 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 00 66 CA C9 
+E5 44 24 44 44 44 04 02 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 00 68 CA C9 
+E5 44 24 44 44 44 04 03 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 01 36 CA C9 
+E5 44 24 44 44 44 04 01 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 01 44 CA C9 
+E5 44 24 44 44 44 
+
+08 00 02 00 02 00 04 00 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 01 46 CA C9 
+E5 44 24 44 44 44 04 02 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 01 49 CA C9 
+E5 44 24 44 44 44 04 03 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 04 65 CA C9 
+E5 44 24 44 44 44 01 00 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 04 65 CA C9 
+E5 44 24 44 44 44 04 03 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 04 67 CA C9 
+E5 44 24 44 44 44 04 00 FF FF FF FF FF FF FF FF 
+FF FF 00 00 00 00 CA C9 E5 44 00 00 04 69 CA C9 
+E5 44 24 44 44 44 01 02 FF FF FF FF FF FF FF FF 
+FF FF 5A 5A 5A 5A 5A 5A 5A 5A 5A 5A 5A 5A 5A 5A 
+5A 5A 5A 5A 5A 5A 
+
+
+
+------------------------------------------------------------------------------------------------------------
+ Rec Nb |Posix Date| Cycles  |  absolute date     |     TSE ident    | message nr |  message interpretation 
+------------------------------------------------------------------------------------------------------------

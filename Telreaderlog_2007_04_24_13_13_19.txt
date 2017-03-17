@@ -1,0 +1,14 @@
+Telegram reader log file
+telegram read at 2007Äê04ÔÂ24ÈÕ13:13:19
+
+Extracting telegrams
+Header balise telegram
+Q_UPDOWN   0 (0)
+M_VERSION  29 (1D)
+Q_MEDIA    0 (0)
+N_PIG      0 (0)
+N_TOTAL    0 (0)
+M_DUP      3 (3)
+M_MCOUNT   39 (27)
+NID_C      1 (001)
+NID_BG     610 (0262)

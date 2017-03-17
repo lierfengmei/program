@@ -1,0 +1,67 @@
+Telegram reader log file
+telegram read at 2009年06月23日11:10:33
+
+.FILETYPE Balise_Telegrams
+.TGML CA 8A 60 BC A4 CC B0 11 B4 6E 0F 8E 1E E0 46 22 
+5C 6A 76 AB 3E 22 91 DC 0C 25 9A FD D0 7D B8 F2 
+25 2F 3E 24 22 07 CD BA 45 04 96 84 E7 C8 C6 A7 
+B1 0F 28 6C 33 5C 43 44 DA 3B 21 44 EA 47 45 E7 
+16 7D 5D 6C C1 75 5D 3A 73 8C 54 AC 0B 30 A1 D0 
+A1 B8 19 C9 4B F3 AE 0F 91 BE D4 83 19 5E 7D C8 
+F0 C9 15 71 9B A6 46 28 1B 32 2E FD 60 46 8C A1 
+50 D4 10 10 D6 4C 3C B8 FE D8 AB EA 46 6A C3 52 
+
+.FILETYPE User_Data
+.DATAL 90 02 7F BB 00 6E C5 50 63 20 00 22 06 01 45 05 
+02 91 08 04 53 19 02 80 15 02 2B 03 03 4A 10 84 
+80 30 FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FC 
+
+Extracting telegrams
+Header balise telegram
+Q_UPDOWN   1 (1)
+M_VERSION  16 (10)
+Q_MEDIA    0 (0)
+N_PIG      0 (0)
+N_TOTAL    1 (1)
+M_DUP      0 (0)
+M_MCOUNT   255 (FF)
+NID_C      472 (1D8)
+    大区编号:59 (3B); 分区编号:0 (0)
+NID_BG     221 (00DD)
+    车站编号:0 (00); 应答器编号:221 (DD)
+Q_LINK     1 (1)
+	NID_PACKET         : 21 线路坡度
+	Q_DIR              : 1 (1)
+	L_PACKET           : 198 (00C6)
+	Q_SCALE            : 1 (1)
+	D_GRADIENT         : 0 (0000)
+	Q_GDIR             : 1 (1)
+	G_A                : 16 (10)
+	N_ITER             : 6 (06)
+	D_GRADIENT         : 162 (00A2)
+	Q_GDIR             : 1 (1)
+	G_A                : 5 (05)
+	D_GRADIENT         : 328 (0148)
+	Q_GDIR             : 1 (1)
+	G_A                : 8 (08)
+	D_GRADIENT         : 553 (0229)
+	Q_GDIR             : 1 (1)
+	G_A                : 25 (19)
+	D_GRADIENT         : 320 (0140)
+	Q_GDIR             : 0 (0)
+	G_A                : 21 (15)
+	D_GRADIENT         : 277 (0115)
+	Q_GDIR             : 1 (1)
+	G_A                : 3 (03)
+	D_GRADIENT         : 421 (01A5)
+	Q_GDIR             : 0 (0)
+	G_A                : 16 (10)
+	NID_PACKET         : 132 调车危险
+	Q_DIR              : 2 (2)
+	L_PACKET           : 24 (0018)
+	Q_ASPECT           : 0 (0)
+FF: END TELEGRAM

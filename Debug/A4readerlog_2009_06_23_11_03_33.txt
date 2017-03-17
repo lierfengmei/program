@@ -1,0 +1,26 @@
+Telegram reader log file
+telegram read at 2009年06月23日11:03:33
+
+.FILETYPE Balise_Telegrams
+.TGMS DE FE F3 81 A7 7C 9F BE 05 E4 03 CD B3 BD 62 C7 
+03 DB B1 8E E3 10 F0 87 67 57 78 20 E0 40 43 8C 
+10 1E 01 E4 BC 91 60 D3 82 1D F0 
+
+.FILETYPE User_Data
+.DATAS 80 00 01 1D 18 00 02 03 9A CF D6 D0 1A 8F DE 95 
+95 9A 90 CB 1E 1C 7F FF FF FF C0 
+
+Extracting telegrams
+Header balise telegram
+Q_UPDOWN   1 (1)
+M_VERSION  0 (00)
+Q_MEDIA    0 (0)
+N_PIG      0 (0)
+N_TOTAL    0 (0)
+M_DUP      0 (0)
+M_MCOUNT   2 (02)
+NID_C      232 (0E8)
+    大区编号:29 (1D); 分区编号:0 (0)
+NID_BG     12288 (3000)
+    车站编号:48 (30); 应答器编号:0 (00)
+Q_LINK     0 (0)

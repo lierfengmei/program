@@ -1,0 +1,127 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by program_balise.rc
+//
+#define IDR_MANIFEST                    1
+#define IDOK2                           2
+#define IDD_ABOUTBOX                    100
+#define IDP_OLE_INIT_FAILED             100
+#define IDR_MAINFRAME                   128
+#define IDR_program_baliseTYPE          129
+#define ID_Menu                         130
+#define ID_A4READ                       131
+#define ID_A5WRITE                      132
+#define ID_A5READ                       133
+#define ID_SSEND                        134
+#define ID_BTM                          135
+#define IDD_DIALOG_READ_TELE            136
+#define IDD_DIALOG_A5_WRITE             137
+#define IDD_DIALOG_WRITE_TELE           137
+#define IDD_DIALOG_S_SEND               139
+#define IDD_DIALOG_BTM                  140
+#define IDD_DIALOG_WRITE_MODE           141
+#define IDD_DIALOG_READMANU             142
+#define IDB_BITMAP_SILENT               144
+#define IDB_BITMAP_FUNCTIONAL           145
+#define IDB_BITMAP_BACK                 146
+#define IDD_DIALOG_BALISE_C             148
+#define IDD_DIALOG_LEU_C                149
+#define IDD_DIALOG_S_READ_SC            150
+#define IDD_DIALOG_WAIT                 151
+#define IDD_DIALOG_LEU_WRITETELE        152
+#define IDD_DIALOG_LEU_ERASE_BTM        153
+#define IDD_DIALOG_LEU_WRITE_FT         154
+#define IDD_DIALOG_LEU_WRITETELE_BX     155
+#define IDC_BUTTON_A4_READ              1000
+#define IDC_LIST1                       1001
+#define IDC_LIST2                       1002
+#define IDC_EDIT1                       1003
+#define IDC_EDIT2                       1004
+#define IDC_EDIT3                       1005
+#define IDC_EDIT4                       1006
+#define IDC_EDIT5                       1007
+#define IDC_EDIT6                       1008
+#define IDC_EDIT7                       1009
+#define IDC_EDIT8                       1010
+#define IDC_EDIT9                       1011
+#define IDC_EDIT10                      1012
+#define IDC_EDIT11                      1013
+#define IDC_EDIT12                      1014
+#define IDC_EDIT13                      1015
+#define IDC_EDIT14                      1016
+#define IDC_BUTTON1                     1017
+#define IDC_BUTTON_A5_READ              1018
+#define IDC_LIST_TELEGRAM               1019
+#define IDC_BUTTON2                     1020
+#define IDC_BUTTON3                     1021
+#define IDC_BUTTON4                     1022
+#define IDC_BUTTON5                     1023
+#define IDC_BUTTON6                     1024
+#define IDC_BUTTON7                     1025
+#define IDC_RADIO_SILENT                1026
+#define IDC_RADIO_FUNCTIONAL            1027
+#define IDC_BUTTON_WRITE                1028
+#define IDC_EDIT_1                      1031
+#define IDC_STATIC1                     1034
+#define IDC_STATIC2                     1035
+#define IDC_STATIC3                     1036
+#define IDC_STATIC4                     1037
+#define IDC_LIST4                       1039
+#define IDC_RADIO_A4                    1040
+#define IDC_RADIO_A5                    1041
+#define IDC_STATIC5                     1042
+#define IDC_STATIC_FUNCTIONAL           1042
+#define IDC_STATIC_SILENT               1043
+#define IDC_BUTTON_MEAS_C               1044
+#define IDC_RADIO_C_1                   1045
+#define IDC_RADIO_C_2                   1046
+#define IDC_RADIO_C_3                   1047
+#define IDC_RADIO_C_4                   1048
+#define IDC_BUTTON_C4_READ              1049
+#define IDC_BUTTON_OPENFILE             1050
+#define IDC_BUTTON_READ_SC              1051
+#define IDC_BUTTON_READ_THE             1052
+#define IDC_BUTTON_OPENFILE1            1052
+#define IDC_BUTTON_READ_THM             1053
+#define IDC_BUTTON_OPENFILE2            1053
+#define IDC_BUTTON_OPENFILE3            1054
+#define IDC_BUTTON_READ_TPC             1055
+#define IDC_BUTTON_OPENFILE4            1055
+#define IDC_BUTTON_READ_TE1             1056
+#define IDC_BUTTON_ERASE_TSE            1056
+#define IDC_BUTTON_READ_TSE             1057
+#define IDC_BUTTON_ERASE_TPC            1057
+#define IDC_BUTTON_WRITE_FT             1057
+#define IDC_BUTTON_ERASE_TE1            1058
+#define IDC_BUTTON_ERASE_THM            1059
+#define IDC_EDIT_INDEX1                 1059
+#define IDC_BUTTON_ERASE_THE            1060
+#define IDC_EDIT_INDEX2                 1060
+#define IDC_BUTTON_ERASE_TE2            1061
+#define IDC_EDIT_INDEX3                 1061
+#define IDC_BUTTON_ERASE_TE3            1062
+#define IDC_EDIT_INDEX4                 1062
+#define IDC_BUTTON_ERASE_TE4            1063
+#define IDC_BUTTON_ERASE_TE5            1064
+#define IDC_BUTTON_ERASE_TE6            1065
+#define ID_WRITE_OPERATIONMODE          32773
+#define ID_PRODUCE_INFO                 32774
+#define ID_LEU_READ_C                   32779
+#define ID_LEU_S_SEND                   32780
+#define ID_BALISE_C                     32782
+#define ID_LEU_READ_SC                  32785
+#define ID_LEU_WRITETELE                32786
+#define ID_LEU_ERASE_BTM                32789
+#define ID_LEU_WRITE_FT                 32790
+#define ID_LEU_WRITETELE_BX             32792
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        157
+#define _APS_NEXT_COMMAND_VALUE         32793
+#define _APS_NEXT_CONTROL_VALUE         1060
+#define _APS_NEXT_SYMED_VALUE           105
+#endif
+#endif
