@@ -1,4 +1,4 @@
-/*¸ÃÎÄ¼şÖĞËùÓĞµÄCStringĞŞ¸Ä³ÉÁËstringÀàĞÍ*/
+/*è¯¥æ–‡ä»¶ä¸­æ‰€æœ‰çš„CStringä¿®æ”¹æˆäº†stringç±»å‹*/
 
 #include "Comm_Balise_ts.h"
 
@@ -8,7 +8,7 @@
 #include <string.h>
 //#include <atltime.h>
 //#include "resource.h"
-#include "Const.h"
+//#include "Const.h"
 //#include <setupapi.h>
 #include <string>
 //#pragma comment(lib,"Setupapi.lib")
@@ -24,10 +24,10 @@ typedef bool BOOL;
 typedef unsigned char byte;
 typedef unsigned long ULONG;
 
-//logÎÄ¼ş
+//logæ–‡ä»¶
 //CStdioFile logfile;
 
-//¶ÁÈë»º³åÇø
+//è¯»å…¥ç¼“å†²åŒº
 byte ReadBuf[MAXREADBUF];
 DWORD ReadBufLen;
 
@@ -105,7 +105,7 @@ ULONG Reflect(ULONG ref,byte ch)
 {
 	ULONG value=0;
 
-	//½»»»bit0 ºÍ bit7, bit1 ºÍ bit6£¬.....
+	//äº¤æ¢bit0 å’Œ bit7, bit1 å’Œ bit6ï¼Œ.....
 	for(int i=1;i<(ch+1);i++)
 	{
 		if(ref & 1) value|= (1<<(ch-i));
@@ -172,7 +172,7 @@ ULONG cal_crc32(byte* data,ULONG len)
 	return crc32;
 }
 
-//ÏòÎÄ¼şÖĞĞ´×Ö·ûÄÚÈİ
+//å‘æ–‡ä»¶ä¸­å†™å­—ç¬¦å†…å®¹
 /*void Print_Log(CStdioFile* ptr_file,string ss)
 {
 	CFileException ex;
@@ -190,10 +190,10 @@ void Print_Log(string ss)
 }
 
 
-//Êı¾İÏò×óÒÆÎ»
-//data[]:Êı¾İ»º³åÇø
-//len_data:ÒªÒÆ¶¯µÄÊı¾İ¸öÊı
-//len_shift_bit:Ã¿¸ö×Ö½ÚÒÆ¶¯µÄÎ»Êı;0~8
+//æ•°æ®å‘å·¦ç§»ä½
+//data[]:æ•°æ®ç¼“å†²åŒº
+//len_data:è¦ç§»åŠ¨çš„æ•°æ®ä¸ªæ•°
+//len_shift_bit:æ¯ä¸ªå­—èŠ‚ç§»åŠ¨çš„ä½æ•°;0~8
 void left_shift_bit(byte data[],int len_data,int len_shift_bit)
 {
 	int i;
@@ -205,20 +205,19 @@ void left_shift_bit(byte data[],int len_data,int len_shift_bit)
 	for(i=0;i<len_data;i++)
 	{
 		temp=data[i]<<len_shift_bit;
-		if( i != (len_data-1) ) temp+=(data[i+1]>>(8-len_shift_bit));
 
 		temp&=0xff;
 		data[i]=temp;
 	}
 }
 
-//Êı¾İÏò×óÒÆÎ»£¬²¢¸´ÖÆÊı×é
-//data[]:Êı¾İÔ´Êı×é
-//len_data:Êı¾İÔ´Êı×é³¤¶È
-//dup_mul:Ä¿±êÊı×éÊÇÔ´Êı×éµÄ±¶Êı£¬¼´¸´ÖÆ dup_mul-1±¶Êı¾İ¡£
-//len_shift_bits:Ã¿¸ö×Ö½ÚÒÆ¶¯µÄÎ»Êı;0~8
-//total_len:·µ»ØÊı×éÓĞĞ§Êı¾İµÄ×Ü³¤¶È¡£
-void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int* total_len)
+//æ•°æ®å‘å·¦ç§»ä½ï¼Œå¹¶å¤åˆ¶æ•°ç»„
+//data[]:æ•°æ®æºæ•°ç»„
+//len_data:æ•°æ®æºæ•°ç»„é•¿åº¦
+//dup_mul:ç›®æ ‡æ•°ç»„æ˜¯æºæ•°ç»„çš„å€æ•°ï¼Œå³å¤åˆ¶ dup_mul-1å€æ•°æ®ã€‚
+//len_shift_bits:æ¯ä¸ªå­—èŠ‚ç§»åŠ¨çš„ä½æ•°;0~8
+//total_len:è¿”å›æ•°ç»„æœ‰æ•ˆæ•°æ®çš„æ€»é•¿åº¦ã€‚
+/*void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int* total_len)
 {
 	int j,k;
 	byte temp,temp1;
@@ -228,31 +227,31 @@ void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int
 	if(len_shift_bits<0) len_shift_bits=0;
 	else if(len_shift_bits>8) len_shift_bits=8;
 
-	//±£´æÔ´Êı×é×îºóÒ»¸öÊı¡£
+	//ä¿å­˜æºæ•°ç»„æœ€åä¸€ä¸ªæ•°ã€‚
 	last_data=data[len_data-1];
 
 	for(k=1;k<dup_mul;k++)
 	{
-		//¸´ÖÆ
+		//å¤åˆ¶
 		for(j=0;j<len_data;j++)
 		{
 			data[len_data*k+j-del_byte]=data[j];
 		}
 		data[len_data*(k+1)-1-del_byte]=last_data;
 	
-		//´¦Àí:µÚÒ»¸öÊıÓĞ¶àÉÙÎ»ÒÆµ½ÉÏ´Î×îºóÒ»¸öÊı¾İ
+		//å¤„ç†:ç¬¬ä¸€ä¸ªæ•°æœ‰å¤šå°‘ä½ç§»åˆ°ä¸Šæ¬¡æœ€åä¸€ä¸ªæ•°æ®
 		temp1=data[len_data*k-del_byte];
 		temp1>>=(8-(len_shift_bits*k)%8);
 		
-		//ÉÏ´Î×îºóÒ»¸öÊı¾İÁôÏÂµÄÎ»
+		//ä¸Šæ¬¡æœ€åä¸€ä¸ªæ•°æ®ç•™ä¸‹çš„ä½
 		temp=0xff;
-		temp<<=(len_shift_bits*k)%8;//ÒÆ³ö
+		temp<<=(len_shift_bits*k)%8;//ç§»å‡º
 		data[len_data*k-del_byte-1] &=temp;
 
-		//µÃµ½ÉÏ´Î×îºóÒ»¸öÊı¾İ
+		//å¾—åˆ°ä¸Šæ¬¡æœ€åä¸€ä¸ªæ•°æ®
 		data[len_data*k-del_byte-1] |=temp1;
 
-		//ºó±ßËùÓĞÊı¾İÒÆÎ»
+		//åè¾¹æ‰€æœ‰æ•°æ®ç§»ä½
 		left_shift_bit(&data[len_data*k-del_byte],len_data,(len_shift_bits*k)%8);
 
 		del_byte=(k*len_shift_bits)/8;
@@ -261,7 +260,7 @@ void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int
 	del_byte=(dup_mul*len_shift_bits)/8;
 	(*total_len)=len_data*dup_mul-del_byte;
 }
-
+*/
 string UserTelegram_Description(int list_serial,int pos)
 {
 	string m_header[10]={"Q_UPDOWN","M_VERSION","Q_MEDIA","N_PIG","N_TOTAL",
@@ -314,7 +313,7 @@ string UserTelegram_Description(int list_serial,int pos)
 	int i;
 	string null_s="";
 
-	//¼ÆËã³¤¶È
+	//è®¡ç®—é•¿åº¦
 	len2=0;
 	switch(list_serial)
 	{
@@ -407,7 +406,7 @@ string UserTelegram_Description(int list_serial,int pos)
 
 	switch(list_serial)
 	{
-	case 0://±¨ÎÄĞÅÏ¢Ö¡
+	case 0://æŠ¥æ–‡ä¿¡æ¯å¸§
 		if(pos>=10 || pos<0) return null_s;
 
         len=m_header[pos].size();
@@ -542,10 +541,10 @@ string UserTelegram_Description(int list_serial,int pos)
 	return null_s;
 }
 
-//´ÓÊı×éÖĞ°´ Bit È¡Êı¾İ
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
-//get_bit_len£ºÈ¡0~15Î»Êı¾İ
+//ä»æ•°ç»„ä¸­æŒ‰ Bit å–æ•°æ®
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
+//get_bit_lenï¼šå–0~15ä½æ•°æ®
 DWORD Get_Data_From_Byte(byte usertele[],int len_array,int get_bit_len)
 {
 	DWORD get_data;
@@ -588,9 +587,9 @@ DWORD Get_Data_From_Byte(byte usertele[],int len_array,int get_bit_len)
 	return get_data;
 }
 
-//¸ñÊ½»¯±¨ÎÄÊı¾İ
-//data£ºÒªÏÔÊ¾µÄÊı¾İ
-//bits_len£ºÏÔÊ¾³¤¶È
+//æ ¼å¼åŒ–æŠ¥æ–‡æ•°æ®
+//dataï¼šè¦æ˜¾ç¤ºçš„æ•°æ®
+//bits_lenï¼šæ˜¾ç¤ºé•¿åº¦
 /*string UserTelegram_Data_Format(DWORD data,int bits_len)
 {
 	string ss="";
@@ -609,12 +608,12 @@ DWORD Get_Data_From_Byte(byte usertele[],int len_array,int get_bit_len)
 */
 
 //int sprintf(char *str, char *format, variable-list);
-//¸ñÊ½»¯±¨ÎÄÊı¾İ
-//data£ºÒªÏÔÊ¾µÄÊı¾İ
-//bits_len£ºÏÔÊ¾³¤¶È
+//æ ¼å¼åŒ–æŠ¥æ–‡æ•°æ®
+//dataï¼šè¦æ˜¾ç¤ºçš„æ•°æ®
+//bits_lenï¼šæ˜¾ç¤ºé•¿åº¦
 string UserTelegram_Data_Format(DWORD data,int bits_len)
 {
-  char* p = "";
+  char p[100];
   if(bits_len>=0 && bits_len<=4)
     sprintf(p,"%d (%X)\n",data,data);
   else if(bits_len>4 && bits_len<=8)
@@ -626,12 +625,27 @@ string UserTelegram_Data_Format(DWORD data,int bits_len)
   string ss = p;
   return ss;
 }
+/*
+string myFormat(const char* type,byte param)
+{
+  char p[]="";
+  sprintf(p,type,param);
+  string ss=p;
+  return ss;
+}
+*/
+/*char* myFormatnew(const char* type,int param)
+{
+  char p[]="";
+  sprintf(p,type,param);
+  return p;
+}
+*/
 
-
-//·ÖÎö±¨ÎÄĞÅÏ¢Ö¡
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†ææŠ¥æ–‡ä¿¡æ¯å¸§
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 //void Analyse_Usertele_Header(CStdioFile* file,byte usertele[],int len_array)
 void Analyse_Usertele_Header(byte usertele[],int len_array)
 {
@@ -644,9 +658,9 @@ void Analyse_Usertele_Header(byte usertele[],int len_array)
 
 	//Print_Log(file,"Header balise telegram\n");
     Print_Log("Header balise telegram\n");
-	//ĞÅÏ¢´«ËÍµÄ·½Ïò£»°æ±¾±àºÅ£»ĞÅÏ¢´«ÊäÃ½½é£»±¾Ó¦´ğÆ÷ÔÚÓ¦´ğÆ÷×éÖĞµÄÎ»ÖÃ£»
-	//Ó¦´ğÆ÷×éÖĞËù°üº¬µÄÓ¦´ğÆ÷ÊıÁ¿£»±¾Ó¦´ğÆ÷ĞÅÏ¢ÓëÇ°ºóÓ¦´ğÆ÷ĞÅÏ¢µÄ¹ØÏµ£»
-	//±¨ÎÄ¼ÆÊıÆ÷£»µØÇø±àºÅ£»Ó¦´ğÆ÷£¨×é£©±àºÅ;Ó¦´ğÆ÷µÄÁ´½Ó¹ØÏµ
+	//ä¿¡æ¯ä¼ é€çš„æ–¹å‘ï¼›ç‰ˆæœ¬ç¼–å·ï¼›ä¿¡æ¯ä¼ è¾“åª’ä»‹ï¼›æœ¬åº”ç­”å™¨åœ¨åº”ç­”å™¨ç»„ä¸­çš„ä½ç½®ï¼›
+	//åº”ç­”å™¨ç»„ä¸­æ‰€åŒ…å«çš„åº”ç­”å™¨æ•°é‡ï¼›æœ¬åº”ç­”å™¨ä¿¡æ¯ä¸å‰ååº”ç­”å™¨ä¿¡æ¯çš„å…³ç³»ï¼›
+	//æŠ¥æ–‡è®¡æ•°å™¨ï¼›åœ°åŒºç¼–å·ï¼›åº”ç­”å™¨ï¼ˆç»„ï¼‰ç¼–å·;åº”ç­”å™¨çš„é“¾æ¥å…³ç³»
 	
 	for(i=0;i<frame_var_num;i++)
 	{
@@ -665,13 +679,13 @@ void Analyse_Usertele_Header(byte usertele[],int len_array)
 				nid=temp;
 				temp=((nid>>3) & 0x7f);
 				ss = UserTelegram_Data_Format(temp,7);
-				ss.Remove('\n');
-				ss1="    ´óÇø±àºÅ:";
+				//ss.Remove('\n');
+				ss1="    å¤§åŒºç¼–å·:";
 				ss1+=ss;
 
 				temp=(nid & 0x07);
 				ss = UserTelegram_Data_Format(temp,3);
-				ss1+="; ·ÖÇø±àºÅ:";
+				ss1+="; åˆ†åŒºç¼–å·:";
 				ss1+=ss;
 			//	Print_Log(ss1);
             Print_Log(ss1);
@@ -681,13 +695,13 @@ void Analyse_Usertele_Header(byte usertele[],int len_array)
 				nid=temp;
 				temp=((nid>>8) & 0x3f);
 				ss = UserTelegram_Data_Format(temp,6);
-				ss.Remove('\n');
-				ss1="    ³µÕ¾±àºÅ:";
+				//ss.Remove('\n');
+				ss1="    è½¦ç«™ç¼–å·:";
 				ss1+=ss;
 
 				temp=(nid & 0xff);
 				ss = UserTelegram_Data_Format(temp,8);
-				ss1+="; Ó¦´ğÆ÷±àºÅ:";
+				ss1+="; åº”ç­”å™¨ç¼–å·:";
 				ss1+=ss;
 			//	Print_Log(ss1);
             Print_Log(ss1);
@@ -698,10 +712,10 @@ void Analyse_Usertele_Header(byte usertele[],int len_array)
 
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-5
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-5
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 //BOOL Analyse_Usertele_Etcs5(CStdioFile* file,byte usertele[],int len_array)
 BOOL Analyse_Usertele_Etcs5(byte usertele[],int len_array)
 {
@@ -737,7 +751,11 @@ BOOL Analyse_Usertele_Etcs5(byte usertele[],int len_array)
 		//*****************************
 		temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 	
-		if(i==0) ss.Format("%d Ó¦´ğÆ÷Á´½Ó\n",temp);
+		if(i==0) //ss.Format("%d åº”ç­”å™¨é“¾æ¥\n",temp);
+        {
+          cout<<temp<<"åº”ç­”å™¨é“¾æ¥"<<endl;
+          ss.clear();
+        }
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(5,i);
@@ -751,7 +769,7 @@ BOOL Analyse_Usertele_Etcs5(byte usertele[],int len_array)
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -786,7 +804,7 @@ Print_Log(ss1);
 		}
 	}
 	
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -795,10 +813,10 @@ Print_Log(ss1);
 	return (!error_flag);
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-21
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-21
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs21(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -833,7 +851,12 @@ BOOL Analyse_Usertele_Etcs21(byte usertele[],int len_array)
 		//*****************************
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d ÏßÂ·ÆÂ¶È\n",temp);
+		if(i==0) //ss.Format("%d çº¿è·¯å¡åº¦\n",temp);
+        {
+          cout<<temp<<"çº¿è·¯å¡åº¦"<<endl;
+          ss.clear();
+        }
+
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(21,i);
@@ -845,7 +868,7 @@ Print_Log(ss1);
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -876,7 +899,7 @@ Print_Log(ss1);
 		}
 	}
 
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -885,10 +908,10 @@ Print_Log(ss1);
 	return (!error_flag);
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-27
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-27
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs27(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -932,7 +955,11 @@ BOOL Analyse_Usertele_Etcs27(byte usertele[],int len_array)
 
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d ÏßÂ·ËÙ¶È\n",temp);
+		if(i==0) //ss.Format("%d çº¿è·¯é€Ÿåº¦\n",temp);
+        {
+          cout<<temp<<"çº¿è·¯é€Ÿåº¦"<<endl;
+          ss.clear();
+        }
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(27,i);
@@ -944,7 +971,7 @@ Print_Log(ss1);
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter1=temp;
@@ -1054,7 +1081,7 @@ Print_Log(ss1);
 			//******************
 		}
 	}
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1064,10 +1091,10 @@ Print_Log(ss1);
 	
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-41
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-41
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs41(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1103,7 +1130,12 @@ BOOL Analyse_Usertele_Etcs41(byte usertele[],int len_array)
 
 		temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d µÈ¼¶×ª»»\n",temp);
+		if(i==0) //ss.Format("%d ç­‰çº§è½¬æ¢\n",temp);
+        {
+          cout<<temp<<"ç­‰çº§è½¬æ¢"<<endl;
+          ss.clear();
+        }
+
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(41,i);
@@ -1115,7 +1147,7 @@ BOOL Analyse_Usertele_Etcs41(byte usertele[],int len_array)
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -1146,7 +1178,7 @@ BOOL Analyse_Usertele_Etcs41(byte usertele[],int len_array)
 		}
 	}
 
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1156,10 +1188,10 @@ BOOL Analyse_Usertele_Etcs41(byte usertele[],int len_array)
 
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-68
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-68
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs68(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1196,7 +1228,11 @@ BOOL Analyse_Usertele_Etcs68(byte usertele[],int len_array)
 
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d ÌØÊâÇø¶Î\n",temp);
+		if(i==0) //ss.Format("%d ç‰¹æ®ŠåŒºæ®µ\n",temp);
+        {
+          cout<<temp<<"ç‰¹æ®ŠåŒºæ®µ"<<endl;
+          ss.clear();
+        }
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(68,i);
@@ -1221,7 +1257,7 @@ BOOL Analyse_Usertele_Etcs68(byte usertele[],int len_array)
 
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -1251,7 +1287,7 @@ BOOL Analyse_Usertele_Etcs68(byte usertele[],int len_array)
 			//********************
 		}
 	}
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1261,10 +1297,10 @@ BOOL Analyse_Usertele_Etcs68(byte usertele[],int len_array)
 
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-132
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-132
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs132(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1296,7 +1332,11 @@ BOOL Analyse_Usertele_Etcs132(byte usertele[],int len_array)
 
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d µ÷³µÎ£ÏÕ\n",temp);
+		if(i==0) //ss.Format("%d è°ƒè½¦å±é™©\n",temp);
+       {
+          cout<<temp<<"è°ƒè½¦å±é™©"<<endl;
+          ss.clear();
+        }
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(132,i);
@@ -1308,7 +1348,7 @@ BOOL Analyse_Usertele_Etcs132(byte usertele[],int len_array)
 		//********************************
 	}
 
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1318,10 +1358,10 @@ BOOL Analyse_Usertele_Etcs132(byte usertele[],int len_array)
 
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-254
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-254
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs254(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1335,7 +1375,12 @@ BOOL Analyse_Usertele_Etcs254(byte usertele[],int len_array)
 	{
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d Default Balise Info\n",temp);
+		if(i==0)// ss.Format("%d Default Balise Info\n",temp);
+        {
+          cout<<temp<<"Default Balise Info"<<endl;
+          ss.clear();
+        }
+
 		else ss=UserTelegram_Data_Format(temp,bit_num[i]);
 
 		ss1=UserTelegram_Description(254,i);
@@ -1347,10 +1392,10 @@ BOOL Analyse_Usertele_Etcs254(byte usertele[],int len_array)
 }
 
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºCTCS-1
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šCTCS-1
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Ctcs1(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1396,7 +1441,7 @@ BOOL Analyse_Usertele_Ctcs1(byte usertele[],int len_array)
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -1426,7 +1471,7 @@ BOOL Analyse_Usertele_Ctcs1(byte usertele[],int len_array)
 		}
 	}
 
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1436,10 +1481,10 @@ BOOL Analyse_Usertele_Ctcs1(byte usertele[],int len_array)
 
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºCTCS-2
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šCTCS-2
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Ctcs2(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1484,7 +1529,7 @@ BOOL Analyse_Usertele_Ctcs2(byte usertele[],int len_array)
 		//********************************
 	};
 
-	//ÊıÁ¿
+	//æ•°é‡
 	if(!error_flag)
 	{
 		n_iter=temp;
@@ -1513,7 +1558,7 @@ BOOL Analyse_Usertele_Ctcs2(byte usertele[],int len_array)
 			//********************
 		}
 	}
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1522,10 +1567,10 @@ BOOL Analyse_Usertele_Ctcs2(byte usertele[],int len_array)
 	return (!error_flag);
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºCTCS-3
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šCTCS-3
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Ctcs3(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1567,7 +1612,7 @@ BOOL Analyse_Usertele_Ctcs3(byte usertele[],int len_array)
 		//********************************
 	};
 
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1576,10 +1621,10 @@ BOOL Analyse_Usertele_Ctcs3(byte usertele[],int len_array)
 	return (!error_flag);
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºCTCS-4
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šCTCS-4
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Ctcs4(byte usertele[],int len_array)
 {
 	DWORD temp;
@@ -1620,7 +1665,7 @@ BOOL Analyse_Usertele_Ctcs4(byte usertele[],int len_array)
 		if(i==1) m_l_packet=temp;
 		//********************************
 	}
-	//¶Áµô´íÎóÊı¾İ***********************
+	//è¯»æ‰é”™è¯¯æ•°æ®***********************
 	if(error_flag)
 	{
 		temp=Get_Data_From_Byte(usertele,len_array,(int)error_len);
@@ -1629,17 +1674,17 @@ BOOL Analyse_Usertele_Ctcs4(byte usertele[],int len_array)
 	return (!error_flag);
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-44
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-44
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs44(byte usertele[],int len_array)
 {
 	DWORD temp;
 	string ss,ss1;
 	int frame_var_num=4;
 	int bit_num[4]={8,2,13,9};
-	string ctcs_ss[5]={"\n"," ¹ìµÀÇø¶Î\n"," ÁÙÊ±ÏŞËÙ\n"," Çø¼ä·´ÏòÔËĞĞ\n"," ´óºÅÂë²íµÀ\n"};
+	string ctcs_ss[5]={"\n"," è½¨é“åŒºæ®µ\n"," ä¸´æ—¶é™é€Ÿ\n"," åŒºé—´åå‘è¿è¡Œ\n"," å¤§å·ç å²”é“\n"};
 	
 	int i;
 	int len;
@@ -1652,15 +1697,19 @@ BOOL Analyse_Usertele_Etcs44(byte usertele[],int len_array)
 	{
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
-		if(i==0) ss.Format("%d CTCSÊı¾İ\n",temp);
+		if(i==0) //ss.Format("%d CTCSæ•°æ®\n",temp);
+        {
+          cout<<temp<<"CTCSæ•°æ®"<<endl;
+          ss.clear();
+        }
+
 		else if(i==(frame_var_num-1)) 
 		{
 			ss=UserTelegram_Data_Format(temp,bit_num[i]);
 			if(temp>0 && temp<5)
 			{
 				len=ss.size();
-				ss.Delete(len-1,1);
-
+			//	ss.Delete(len-1,1);
 				ss+=ctcs_ss[temp];
 			}
 		}
@@ -1694,17 +1743,18 @@ BOOL Analyse_Usertele_Etcs44(byte usertele[],int len_array)
 	return bRet;
 }
 
-//·ÖÎöÓÃ»§ĞÅÏ¢°ü£ºETCS-255
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
+//åˆ†æç”¨æˆ·ä¿¡æ¯åŒ…ï¼šETCS-255
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
 BOOL Analyse_Usertele_Etcs255()
 {
 	string ss;
 	byte temp=0xff;
 	
-	ss.Format("%X: END TELEGRAM\n",temp);
-	Print_Log(ss);
+//	ss.Format("%X: END TELEGRAM\n",temp);
+    cout<<temp<<"END TELEGRAM"<<endl;  
+//	Print_Log(ss);
 
 	return true;
 }
@@ -1713,6 +1763,7 @@ BOOL Analyse_Usertele_Etcs255()
 BOOL Analyse_Usertele_Info(int read_interface,byte usertele[],int len_usertele,byte tele[],int len_tele)
 {
 	string str,temp_str;
+    char temp_p[100];
 	byte m_packet;
 	char buf[256];
 	BOOL bRet=true,bTempRet=true;
@@ -1725,7 +1776,7 @@ BOOL Analyse_Usertele_Info(int read_interface,byte usertele[],int len_usertele,b
 	CurrentTime=CTime::GetCurrentTime();
 	int hour=CurrentTime.GetHour();
 */
-	//´ò¿ªÎÄ¼ş
+	//æ‰“å¼€æ–‡ä»¶
 //	m_readtele_name=file_direct;
 /*	switch(read_interface)
 	{
@@ -1762,50 +1813,62 @@ BOOL Analyse_Usertele_Info(int read_interface,byte usertele[],int len_usertele,b
 //	Print_Log(str);
 Print_Log(str);
 //	str="telegram read at ";
-//	str+=CurrentTime.Format("%YÄê%mÔÂ%dÈÕ%H:%M:%S\n\n");
+//	str+=CurrentTime.Format("%Yå¹´%mæœˆ%dæ—¥%H:%M:%S\n\n");
 //	Print_Log(str);
-Print_Log(str);
 
-	//±¨ÎÄÊı¾İ
+	//æŠ¥æ–‡æ•°æ®
 	str=".FILETYPE Balise_Telegrams\n";
 //	Print_Log(str);
 	Print_Log(str);
 
 	str="";
-	if(len_tele==128)	str=".TGML ";
-	else if(len_tele==43) str=".TGMS ";
+	if(len_tele==128)	str=".TGML \n";
+	else if(len_tele==43) str=".TGMS \n";
 
-	for(i=0;i<len_tele;i++)
+ //   cout<<"len_tele is "<<len_tele<<endl;
+
+	for(i=0;i<len_tele*2;i++)
 	{
-		temp_str.Format("%02X ",tele[i]);
-		str+=temp_str;
+      //cout<<"tele[i]"<<tele[i]<<endl;
+       sprintf(temp_p,"%c",tele[i]);
+        str += (*temp_p);   
 		if((i+1)%16==0) str+="\n";
 	}
 	if(len_tele==43) str+="\n";
 	str+="\n";
+    str+='\0';
 	Print_Log(str);
 
-	//ÓÃ»§±¨ÎÄÊı¾İ
+	//ç”¨æˆ·æŠ¥æ–‡æ•°æ®
 	str=".FILETYPE User_Data\n";
 	Print_Log(str);
 	
 	str="";
-	if(len_usertele==104)	str=".DATAL ";
-	else if(len_usertele==27) str=".DATAS ";
+	if(len_usertele==104)	str=".DATAL \n";
+	else if(len_usertele==27) str=".DATAS \n";
 
-	for(i=0;i<len_usertele;i++)
+ /*   cout<<"for debug, len_usertele is "<<len_usertele<<endl;
+    for(i=0;i<len_usertele;i++)
+      cout<<usertele[i];
+*/
+
+	for(i=0;i<len_usertele*2;i++)
 	{
-		temp_str.Format("%02X ",usertele[i]);
-		str+=temp_str;
+        sprintf(temp_p,"%c",usertele[i]);
+       // sprintf(temp_p,"%02X",int(usertele[i]));   
+        str += (*temp_p);   
 		if((i+1)%16==0) str+="\n";
 	}
 	str+="\n\n";
+  // cout<<"After ..., i is "<<i<<endl; 
+  // cout<<"str is "<<str<<endl; 
+
 	Print_Log(str);
 
-	//½âÎö
+	//è§£æ
 	Print_Log("Extracting telegrams\n");
 
-	//·ÖÎöĞÅÏ¢Ö¡Í·
+	//åˆ†æä¿¡æ¯å¸§å¤´
 	Analyse_Usertele_Header(usertele,len_usertele);
 
 	bRet=true;
@@ -1834,10 +1897,10 @@ Print_Log(str);
 		case 132://ETCS-132
 			bTempRet=Analyse_Usertele_Etcs132(usertele,len_usertele);
 			break;
-		case 254://È±Ê¡
+		case 254://ç¼ºçœ
 			bTempRet=Analyse_Usertele_Etcs254(usertele,len_usertele);
 			break;
-		case 255://½áÊø
+		case 255://ç»“æŸ
 			bTempRet=Analyse_Usertele_Etcs255();
 			break;
 		default:
@@ -1846,14 +1909,14 @@ Print_Log(str);
 		}
 		bRet&=bTempRet;
 		if(!bRet) break;
-	}while(m_packet!=0xff);//½áÊø
+	}while(m_packet!=0xff);//ç»“æŸ
 
 
 	return bRet;
 }
 
-
-//¶ÔÊı×éÃ¿×Ö½Ú½øĞĞÒì»ò
+/*
+//å¯¹æ•°ç»„æ¯å­—èŠ‚è¿›è¡Œå¼‚æˆ–
 void Make_Xor(unsigned int *scr_buff,unsigned int *var_buff1,int num)
 {
 	int i;
@@ -1861,12 +1924,12 @@ void Make_Xor(unsigned int *scr_buff,unsigned int *var_buff1,int num)
 	for(i=0;i<num;i++) scr_buff[i]^=var_buff1[i];
 
 }
-
-//·ÖÎö±¨ÎÄĞÅÏ¢Ö¡
-//file£ºĞ´ÈëÎÄ¼şÖ¸Õë
-//usertele[]£º±¨ÎÄĞÅÏ¢Êı×é
-//len_array£º±¨ÎÄĞÅÏ¢Êı×é³¤¶È
-void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
+*/
+//åˆ†ææŠ¥æ–‡ä¿¡æ¯å¸§
+//fileï¼šå†™å…¥æ–‡ä»¶æŒ‡é’ˆ
+//usertele[]ï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„
+//len_arrayï¼šæŠ¥æ–‡ä¿¡æ¯æ•°ç»„é•¿åº¦
+/*void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
 {
 	DWORD temp;
 	string ss,ss1;
@@ -1875,16 +1938,16 @@ void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
 	int i;
 	DWORD nid;
 
-	//ĞÅÏ¢´«ËÍµÄ·½Ïò£»°æ±¾±àºÅ£»ĞÅÏ¢´«ÊäÃ½½é£»±¾Ó¦´ğÆ÷ÔÚÓ¦´ğÆ÷×éÖĞµÄÎ»ÖÃ£»
-	//Ó¦´ğÆ÷×éÖĞËù°üº¬µÄÓ¦´ğÆ÷ÊıÁ¿£»±¾Ó¦´ğÆ÷ĞÅÏ¢ÓëÇ°ºóÓ¦´ğÆ÷ĞÅÏ¢µÄ¹ØÏµ£»
-	//±¨ÎÄ¼ÆÊıÆ÷£»µØÇø±àºÅ£»Ó¦´ğÆ÷£¨×é£©±àºÅ;Ó¦´ğÆ÷µÄÁ´½Ó¹ØÏµ
+	//ä¿¡æ¯ä¼ é€çš„æ–¹å‘ï¼›ç‰ˆæœ¬ç¼–å·ï¼›ä¿¡æ¯ä¼ è¾“åª’ä»‹ï¼›æœ¬åº”ç­”å™¨åœ¨åº”ç­”å™¨ç»„ä¸­çš„ä½ç½®ï¼›
+	//åº”ç­”å™¨ç»„ä¸­æ‰€åŒ…å«çš„åº”ç­”å™¨æ•°é‡ï¼›æœ¬åº”ç­”å™¨ä¿¡æ¯ä¸å‰ååº”ç­”å™¨ä¿¡æ¯çš„å…³ç³»ï¼›
+	//æŠ¥æ–‡è®¡æ•°å™¨ï¼›åœ°åŒºç¼–å·ï¼›åº”ç­”å™¨ï¼ˆç»„ï¼‰ç¼–å·;åº”ç­”å™¨çš„é“¾æ¥å…³ç³»
 	
 	for(i=0;i<frame_var_num;i++)
 	{
         temp=Get_Data_From_Byte(usertele,len_array,bit_num[i]);
 		
 		ss=UserTelegram_Data_Format(temp,bit_num[i]);
-		ss.Remove('\n');
+		//ss.Remove('\n');
 		ss1=UserTelegram_Description(0,i);
 		ss1+=ss;
 		list->AddString(ss1);
@@ -1897,14 +1960,14 @@ void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
 				nid=temp;
 				temp=((nid>>3) & 0x7f);
 				ss = UserTelegram_Data_Format(temp,7);
-				ss.Remove('\n');
-				ss1="    ´óÇø±àºÅ:";
+		//		ss.Remove('\n');
+				ss1="    å¤§åŒºç¼–å·:";
 				ss1+=ss;
 
 				temp=(nid & 0x07);
 				ss = UserTelegram_Data_Format(temp,3);
-				ss.Remove('\n');
-				ss1+="; ·ÖÇø±àºÅ:";
+			//	ss.Remove('\n');
+				ss1+="; åˆ†åŒºç¼–å·:";
 				ss1+=ss;
 				list->AddString(ss1);
 			}
@@ -1913,14 +1976,14 @@ void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
 				nid=temp;
 				temp=((nid>>8) & 0x3f);
 				ss = UserTelegram_Data_Format(temp,6);
-				ss.Remove('\n');
-				ss1="    ³µÕ¾±àºÅ:";
+			//	ss.Remove('\n');
+				ss1="    è½¦ç«™ç¼–å·:";
 				ss1+=ss;
 
 				temp=(nid & 0xff);
 				ss = UserTelegram_Data_Format(temp,8);
-				ss.Remove('\n');
-				ss1+="; Ó¦´ğÆ÷±àºÅ:";
+		//		ss.Remove('\n');
+				ss1+="; åº”ç­”å™¨ç¼–å·:";
 				ss1+=ss;
 				list->AddString(ss1);
 			}
@@ -1929,9 +1992,9 @@ void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array)
 	};
 
 }
-
-//¶Ônum¸öÊıÏò×óÒÆÒ»Î»
-void left_shift_onebit(unsigned int *temp,int num)
+*/
+//å¯¹numä¸ªæ•°å‘å·¦ç§»ä¸€ä½
+/*void left_shift_onebit(unsigned int *temp,int num)
 {
 	int i;
 	unsigned int temp1;
@@ -1944,19 +2007,20 @@ void left_shift_onebit(unsigned int *temp,int num)
 		temp[i]=temp1;
 	}
 }
-
-//·ÖÎöÊı¾İµÃµ½±¨ÎÄºÍÓÃ»§±¨ÎÄ
-//Ô­Ê¼Êı¾İÔÚscr_data[]ÖĞ
+*/
+//åˆ†ææ•°æ®å¾—åˆ°æŠ¥æ–‡å’Œç”¨æˆ·æŠ¥æ–‡
+//åŸå§‹æ•°æ®åœ¨scr_data[]ä¸­
 //scr_data[0~127]
 
-//×îºó±¨ÎÄ´æµ½des_tele[]Êı×éÖĞ£¬
-//des_tele[0]:±¨ÎÄÊı¾İ³¤¶È
-//des_tele[1] ~ [128]: ±¨ÎÄÊı¾İ
+//æœ€åæŠ¥æ–‡å­˜åˆ°des_tele[]æ•°ç»„ä¸­ï¼Œ
+//des_tele[0]:æŠ¥æ–‡æ•°æ®é•¿åº¦
+//des_tele[1] ~ [128]: æŠ¥æ–‡æ•°æ®
 
-//user_p_tele£ºÓÃ»§±¨ÎÄÊı×é
-//long_or_short:Êä³öµÄ³¤¶ÌÓÃ»§±êÊ¶ 0 ³¤±¨ÎÄ£¬1 ¶Ì±¨ÎÄ
+//user_p_teleï¼šç”¨æˆ·æŠ¥æ–‡æ•°ç»„
+//long_or_short:è¾“å‡ºçš„é•¿çŸ­ç”¨æˆ·æ ‡è¯† 0 é•¿æŠ¥æ–‡ï¼Œ1 çŸ­æŠ¥æ–‡
 
-//·µ»ØÖµ£º0 Õı³££»·Ç0 £º´íÎó
+//è¿”å›å€¼ï¼š0 æ­£å¸¸ï¼›é0 ï¼šé”™è¯¯
+/*
 int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* user_tele,UINT* long_or_short_flag)
 {
 	unsigned long l_temp;
@@ -1972,9 +2036,9 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 	UINT long_or_short;
 
 	len=128;
-	des_tele[0]=(BYTE)(len & 0xff); //???????
-
-	//·ÖÎö±¨ÎÄ
+//	des_tele[0]=(BYTE)(len & 0xff); //???????
+	des_tele[0]=(byte)(len & 0xff); 
+	//åˆ†ææŠ¥æ–‡
 	tel_error=0;
 	for(i=0;i<128;i++) tel_buff[i]=scr_data[i];
 	tel_buff[127]&=~0x01;
@@ -1989,10 +2053,10 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 	tel_start>>=6;
 	
 	if(tel_start!=0)
-	{			//³¤±¨ÎÄ
+	{			//é•¿æŠ¥æ–‡
 		long_or_short=0;
 		if(tel_start==0x1ee)
-		{		//³¤Âë²»ÕıÈ·
+		{		//é•¿ç ä¸æ­£ç¡®
 			tel_error=1;
 			return tel_error;
 		}
@@ -2015,7 +2079,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		for(i=0;i<128;i++) des_tele[i+1]=tel_buff[i];
 		tel_buff[127]&=~0x01;
 
-		//¼ì²éÊÇ·ñ¿É±»g(x)Õû³ı
+		//æ£€æŸ¥æ˜¯å¦å¯è¢«g(x)æ•´é™¤
 		for(i=0;i<948;i++)
 		{
 			if((tel_buff[0] & 0x80)!=0) Make_Xor(tel_buff,glx,10);
@@ -2024,12 +2088,12 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		temp=0;
 		for(i=0;i<10;i++) temp+=tel_buff[i];
 		if(temp!=0)
-		{			//³¤Âë²»ÕıÈ·
+		{			//é•¿ç ä¸æ­£ç¡®
 			tel_error=2;
 			return tel_error;
 		}
 
-		//¼ì²é11Î»ÓĞĞ§
+		//æ£€æŸ¥11ä½æœ‰æ•ˆ
 		for(i=0;i<128;i++) tel_buff[i]=des_tele[i+1];
 		tel_buff[127]&=~0x01;
 
@@ -2042,7 +2106,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 			temp>>=13;
 			temp&=0x7ff;
 			if(bit11_to_10[temp]>=1024)
-			{				//³¤Âë²»ÕıÈ·
+			{				//é•¿ç ä¸æ­£ç¡®
 				tel_error=3;
 				return tel_error;
 			}
@@ -2055,7 +2119,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 				if((temp & 0x0700)==0x0100) zm_or_fm=0;
 				else if((temp & 0x0700)==0x0600) zm_or_fm=1;
 				else
-				{					//³¤Âë²»ÕıÈ·
+				{					//é•¿ç ä¸æ­£ç¡®
 					tel_error=4;
 					return tel_error;
 				}
@@ -2067,7 +2131,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 
 	}
 	else
-	{			//¶Ì±¨ÎÄ
+	{			//çŸ­æŠ¥æ–‡
 		long_or_short=1;
 
 		for(i=0;i<128;i++) tel_buff[i]=scr_data[i];
@@ -2129,7 +2193,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		}
 		tel_buff[42]&=~0x07;
 
-		//¼ì²éÊÇ·ñ¿É±»g(x)Õû³ı
+		//æ£€æŸ¥æ˜¯å¦å¯è¢«g(x)æ•´é™¤
 		for(i=0;i<266;i++)
 		{
 			if((tel_buff[0] & 0x80)!=0) Make_Xor(tel_buff,gsx,10);
@@ -2138,12 +2202,12 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		temp=0;
 		for(i=0;i<10;i++) temp+=tel_buff[i];
 		if(temp!=0)
-		{			//¶ÌÂë²»ÕıÈ·
+		{			//çŸ­ç ä¸æ­£ç¡®
 			tel_error=0x12;
 			return tel_error;
 		}
 
-		//¼ì²é11Î»ÓĞĞ§
+		//æ£€æŸ¥11ä½æœ‰æ•ˆ
 		for(i=0;i<128;i++) tel_buff[i]=des_tele[i+1];
 		tel_buff[42]&=~0x07;
 
@@ -2156,7 +2220,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 			temp>>=13;
 			temp&=0x7ff;
 			if(bit11_to_10[temp]>=1024)
-			{				//¶ÌÂë²»ÕıÈ·
+			{				//çŸ­ç ä¸æ­£ç¡®
 				tel_error=0x13;
 				return tel_error;
 			}
@@ -2169,7 +2233,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 				if((temp & 0x0700)==0x0100) zm_or_fm=0;
 				else if((temp & 0x0700)==0x0600) zm_or_fm=1;
 				else
-				{					//¶ÌÂë²»ÕıÈ·
+				{					//çŸ­ç ä¸æ­£ç¡®
 					tel_error=0x14;
 					return tel_error;
 				}
@@ -2186,7 +2250,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		for(i=0;i<83-long_or_short*62;i++) user_p_tele[i]^=0x3ff;
 	}
 
-	//½âÈÅ
+	//è§£æ‰°
 	l_temp=2801775573;
 	l_temp*=sb_temp;
 	l_temp&=0xffffffff;
@@ -2218,7 +2282,7 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 		}
 		user_p_tele[i]=temp;
 	}
-	//»Ö¸´µÚÒ»¸ö10Î»
+	//æ¢å¤ç¬¬ä¸€ä¸ª10ä½
 	temp=0;
 	for(i=1;i<83-long_or_short*62;i++) temp+=user_p_tele[i];
 	temp=user_p_tele[0]-temp;
@@ -2231,11 +2295,14 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 	for(i=0;i<104;i++) user_p_tele[i]&=0x3ff;
 
 
-	for(i=0;i<104;i++)
+		if(j==82) j=user_p_tele[j+21]<<10;
+		else j=(user_p_tele[j+21]<<10)+user_p_tele[j+21+1];
+		j>>=(12-temp);
+		user_p_tele[i]=(j&0xff);
+	}
+	if(long_or_short==0) user_p_tele[103]&=0xfc;
+	else
 	{
-		temp=i*8;
-		j=temp/10;
-		temp=temp%10;
 		if(j==82) j=user_p_tele[j+21]<<10;
 		else j=(user_p_tele[j+21]<<10)+user_p_tele[j+21+1];
 		j>>=(12-temp);
@@ -2252,8 +2319,8 @@ int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* us
 	for(i=0;i<104;i++) user_tele[i]=user_p_tele[i] & 0xff;
 	return 0;
 }
-
-//¸´ÖÆÓÃ»§±¨ÎÄÊı¾İ
+*/
+//å¤åˆ¶ç”¨æˆ·æŠ¥æ–‡æ•°æ®
 void Copy_UserTele(byte des[],byte source[],int len_array)
 {
 	int i;
@@ -2261,3 +2328,157 @@ void Copy_UserTele(byte des[],byte source[],int len_array)
 	for(i=0;i<len_array;i++)
 		des[i]=source[i];
 }
+
+//ç›´æ¥è¾“å…¥ç”¨æˆ·æŠ¥æ–‡,å¯¹æŠ¥æ–‡è¿›è¡Œè§£æ
+BOOL Analyse_Usertele_Info(byte usertele[],int len_usertele)
+{
+	string str,temp_str;
+    char temp_p[100];
+	byte m_packet;
+	char buf[256];
+	BOOL bRet=true,bTempRet=true;
+	int i;
+	
+/*	GetModuleFileName(NULL,buf,256);
+	*(strrchr(buf, '\\') + 1) = '\0';
+	file_direct.Format("%s",buf);
+	
+	CurrentTime=CTime::GetCurrentTime();
+	int hour=CurrentTime.GetHour();
+*/
+	//æ‰“å¼€æ–‡ä»¶
+//	m_readtele_name=file_direct;
+/*	switch(read_interface)
+	{
+	case ANALYSE_USERTELE_BALISE_A4:
+		m_readtele_name+="A4";
+		break;
+	case ANALYSE_USERTELE_BALISE_A5:
+        m_readtele_name+="A5";
+		break;
+	case ANALYSE_USERTELE_LEU_C1:
+        m_readtele_name+="C1";
+		break;
+	case ANALYSE_USERTELE_LEU_C2:
+        m_readtele_name+="C2";
+		break;
+	case ANALYSE_USERTELE_LEU_C3:
+        m_readtele_name+="C3";
+		break;
+	case ANALYSE_USERTELE_LEU_C4:
+        m_readtele_name+="C4";
+		break;
+	default:
+		return false;
+	}
+
+	m_readtele_name+="readerlog_";
+	m_readtele_name+=CurrentTime.Format("%Y_%m_%d_%H_%M_%S");
+	m_readtele_name+=".txt";
+
+	if(!m_readtele.Open(m_readtele_name,CFile::modeCreate | CFile::modeWrite ,&ex))
+		return false;
+*/	
+	str="Telegram reader log file\n";
+    Print_Log(str);
+//	str="telegram read at ";
+//	str+=CurrentTime.Format("%Yå¹´%mæœˆ%dæ—¥%H:%M:%S\n\n");
+//	Print_Log(str);
+
+	//æŠ¥æ–‡æ•°æ®
+	str=".FILETYPE Balise_Telegrams\n";
+	Print_Log(str);
+
+/*	str="";
+	if(len_tele==128)	str=".TGML \n";
+	else if(len_tele==43) str=".TGMS \n";
+
+	for(i=0;i<len_tele*2;i++)
+	{
+      //cout<<"tele[i]"<<tele[i]<<endl;
+       sprintf(temp_p,"%c",tele[i]);
+       str += (*temp_p);   
+	   if((i+1)%16==0) str+="\n";
+	}
+	if(len_tele==43) str+="\n";
+	str+="\n";
+    str+='\0';
+	Print_Log(str);
+*/
+
+	//ç”¨æˆ·æŠ¥æ–‡æ•°æ®
+	str=".FILETYPE User_Data\n";
+	Print_Log(str);
+	
+	str="";
+	if(len_usertele==104)	str=".DATAL \n";
+	else if(len_usertele==27) str=".DATAS \n";
+
+ /*   cout<<"for debug, len_usertele is "<<len_usertele<<endl;
+    for(i=0;i<len_usertele;i++)
+      cout<<usertele[i];
+*/
+
+	for(i=0;i<len_usertele*2;i++)
+	{
+        sprintf(temp_p,"%c",usertele[i]);
+       // sprintf(temp_p,"%02X",int(usertele[i]));   
+        str += (*temp_p);   
+		if((i+1)%16==0) str+="\n";
+	}
+	str+="\n\n";
+  // cout<<"After ..., i is "<<i<<endl; 
+  // cout<<"str is "<<str<<endl; 
+
+	Print_Log(str);
+
+	//è§£æ
+	Print_Log("Extracting telegrams\n");
+
+	//åˆ†æä¿¡æ¯å¸§å¤´
+	Analyse_Usertele_Header(usertele,len_usertele);
+
+	bRet=true;
+	do{
+		m_packet=usertele[0];
+		switch(m_packet)
+		{
+		case 5://ETCS-5
+			bTempRet=Analyse_Usertele_Etcs5(usertele,len_usertele);
+			break;
+		case 21://ETCS-21
+			bTempRet=Analyse_Usertele_Etcs21(usertele,len_usertele);
+			break;
+		case 27://ETCS-27
+			bTempRet=Analyse_Usertele_Etcs27(usertele,len_usertele);
+			break;
+		case 41://ETCS-41
+			bTempRet=Analyse_Usertele_Etcs41(usertele,len_usertele);
+			break;
+		case 44://ETCS-44
+			bTempRet=Analyse_Usertele_Etcs44(usertele,len_usertele);
+			break;
+		case 68://ETCS-68
+			bTempRet=Analyse_Usertele_Etcs68(usertele,len_usertele);
+			break;
+		case 132://ETCS-132
+			bTempRet=Analyse_Usertele_Etcs132(usertele,len_usertele);
+			break;
+		case 254://ç¼ºçœ
+			bTempRet=Analyse_Usertele_Etcs254(usertele,len_usertele);
+			break;
+		case 255://ç»“æŸ
+			bTempRet=Analyse_Usertele_Etcs255();
+			break;
+		default:
+			bTempRet=false;
+			break;
+		}
+		bRet&=bTempRet;
+		if(!bRet) break;
+	}while(m_packet!=0xff);//ç»“æŸ
+
+
+	return bRet;
+}
+

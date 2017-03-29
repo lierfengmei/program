@@ -3,7 +3,7 @@
 //date:2002.12.18
 
 //#include "afxmt.h"
-#pragma once
+//#pragma once
 #include <string>
 #include <iostream>
 
@@ -107,7 +107,7 @@ int strtodata(unsigned char *str, unsigned char *data, int len, int flag);
 //int strtodata(string source_str,  DWORD *data, int len,int flag);
 
 //BOOL InitTelegram(string ff,byte send[]);
-void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int* total_len);
+//void left_shift_bits(byte data[],int len_data,int dup_mul,int len_shift_bits,int* total_len);
 unsigned int cal_crc(unsigned char *ptr,unsigned int len);
 ULONG cal_crc32(byte* data,ULONG len);
 
@@ -116,17 +116,21 @@ ULONG cal_crc32(byte* data,ULONG len);
 
 BOOL Analyse_Usertele_Info(int h_flag,byte usertele[],int len_usertele,byte tele[],int len_tele);
 DWORD Get_Data_From_Byte(byte usertele[],int len_array,int get_bit_len);
-void Analyse_Usertele_Header(CStdioFile* file,byte usertele[],int len_array);
+//void Analyse_Usertele_Header(CStdioFile* file,byte usertele[],int len_array);
+void Analyse_Usertele_Header(byte usertele[],int len_array);
 //void Print_Log(CStdioFile* ptr_file,string ss);
 void Print_Log(string ss);
 string UserTelegram_Description(int list_serial,int pos);
+//string myFormat(const char* type,byte param);
+//char* myFormatnew(const char* type,int param);
+//void Make_Xor(unsigned int *scr_buff,unsigned int *var_buff1,int num);
+//void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array);
 
-void Make_Xor(unsigned int *scr_buff,unsigned int *var_buff1,int num);
-void Analyse_Usertele_Header(CListBox* list,byte usertele[],int len_array);
-
-int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* user_tele,UINT* long_or_short_flag);
+//int Analyse_Tele_Data_Get_TeleAndUsertele(byte* scr_data,byte* des_tele,byte* user_tele,UINT* long_or_short_flag);
 
 //BOOL Start_ResetUsbDev(BOOL start_stop);
 //BOOL Get_ComDev();
 
+void left_shift_bit(byte data[],int len_data,int len_shift_bit);
 void Copy_UserTele(byte des[],byte source[],int len_array);
+BOOL Analyse_Usertele_Info(byte usertele[],int len_usertele);
