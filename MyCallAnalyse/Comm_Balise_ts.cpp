@@ -1760,7 +1760,7 @@ BOOL Analyse_Usertele_Etcs255()
 }
 
 
-BOOL Analyse_Usertele_Info(int read_interface,byte usertele[],int len_usertele,byte tele[],int len_tele)
+BOOL Analyse_Usertele_Info_OLD_BY_MM(int read_interface,byte usertele[],int len_usertele,byte tele[],int len_tele)
 {
 	string str,temp_str;
     char temp_p[100];

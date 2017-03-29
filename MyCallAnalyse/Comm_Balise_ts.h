@@ -114,7 +114,7 @@ ULONG cal_crc32(byte* data,ULONG len);
 //BOOL Open_LogFile();
 //BOOL Close_LogFile();
 
-BOOL Analyse_Usertele_Info(int h_flag,byte usertele[],int len_usertele,byte tele[],int len_tele);
+BOOL Analyse_Usertele_Info_OLD_BY_MM(int h_flag,byte usertele[],int len_usertele,byte tele[],int len_tele);
 DWORD Get_Data_From_Byte(byte usertele[],int len_array,int get_bit_len);
 //void Analyse_Usertele_Header(CStdioFile* file,byte usertele[],int len_array);
 void Analyse_Usertele_Header(byte usertele[],int len_array);

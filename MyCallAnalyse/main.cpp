@@ -17,7 +17,6 @@ int main()
 byte user_tele_ori[]="90 24 7E 63 44 02 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ";
 int len_usertele = 104;
 
-
 byte tele_ori[]="00 06 75 2C F5 B2 07 A3 29 E3 6F C7 D6 51 B9 56 9E 87 02 D7 52 41 0F B0 53 5C 8B 02 CF 82 38 AD 51 AC B9 4E 2B F8 66 9E E9 68 2C 67 F2 F6 57 11 40 D4 34 51 E3 B0 74 D1 84 2F 81 DA FB C6 7B F5 8A 19 3F 57 FB 1A 19 2B 60 40 67 96 16 8D 41 60 AC 2F E6 7D D3 FB F3 76 BB 56 94 44 FA 29 4B 8C 2E 71 79 C3 89 96 58 79 2D EA EC 7D 79 BA 5C 5B EC 78 10 16 1C E6 2D F0 A5 F0 45 4A CC 3E D2 1C";
 int len_tele = 128; 
 
@@ -35,6 +34,9 @@ int len_tele = 128;
   cout<<"user_tele is;"<<endl;
   cout<<user_tele<<endl;
 
+  Analyse_Usertele_Info(user_tele,len_usertele);
+
+
   //删除tele_ori的空格
   i = 0;j=0;
   byte tele[300];
@@ -51,10 +53,8 @@ int len_tele = 128;
   cout<<tele<<endl;
 
   //解析报文
-  //Analyse_Usertele_Info(ANALYSE_USERTELE_BALISE_A4,user_tele,len_usertele,tele,len_tele);
+//  Analyse_Usertele_Info(ANALYSE_USERTELE_BALISE_A4,user_tele,len_usertele,tele,len_tele);
   
-  Analyse_Usertele_Info(user_tele,len_usertele);
-
   //解码报文，将1024位报文解码成用户报文.
   
 //分析数据得到报文和用户报文
