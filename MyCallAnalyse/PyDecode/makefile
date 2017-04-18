@@ -1,14 +1,14 @@
 #edit:main.o Comm_Balise_ts.o
 #	g++ -o edit main.o Comm_Balise_ts.o
 
-libAnalyse.so: main.cpp Comm_Balise_ts.cpp
-	g++ -o libAnalyse.so -shared -fPIC main.cpp Comm_Balise_ts.cpp
+libDecode.so:main.cpp Decode.cpp
+	g++ -o libDecode.so -shared -fPIC main.cpp Decode.cpp
 
 clean:
-	rm libAnalyse.so
+	rm libDecode.so
 
 run:
-	python Analyse.py
+	python Decode.py
 
 #main.o:main.cpp Comm_Balise_ts.h 
 #	g++ -c main.cpp
@@ -17,5 +17,5 @@ run:
 #	g++ -c Comm_Balise_ts.cpp
 
 #clean:
-#	rm edit main.o Comm_Balise_ts.o 
+#	rm main.o Comm_Balise_ts.o libAnalyse.so
 
