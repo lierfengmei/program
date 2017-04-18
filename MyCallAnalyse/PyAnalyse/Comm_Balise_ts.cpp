@@ -187,6 +187,7 @@ ULONG cal_crc32(byte* data,ULONG len)
 void Print_Log(string ss)
 {
   cout<<ss<<endl;
+//  cout<<"laaaaaa"<<endl;
 }
 
 
@@ -1810,24 +1811,23 @@ BOOL Analyse_Usertele_Info(int read_interface,byte usertele[],int len_usertele,b
 		return false;
 */	
 	str="Telegram reader log file\n";
-//	Print_Log(str);
-Print_Log(str);
+	Print_Log(str);
 //	str="telegram read at ";
 //	str+=CurrentTime.Format("%Y年%m月%d日%H:%M:%S\n\n");
 //	Print_Log(str);
 
 	//报文数据
 	str=".FILETYPE Balise_Telegrams\n";
-//	Print_Log(str);
 	Print_Log(str);
 
 	str="";
 	if(len_tele==128)	str=".TGML \n";
 	else if(len_tele==43) str=".TGMS \n";
 
- //   cout<<"len_tele is "<<len_tele<<endl;
+    cout<<"len_tele is "<<len_tele<<endl;
 
-	for(i=0;i<len_tele*2;i++)
+    for(i=0;i<len_tele;i++)
+//	for(i=0;i<len_tele*2;i++)
 	{
       //cout<<"tele[i]"<<tele[i]<<endl;
        sprintf(temp_p,"%c",tele[i]);
@@ -1852,7 +1852,8 @@ Print_Log(str);
       cout<<usertele[i];
 */
 
-	for(i=0;i<len_usertele*2;i++)
+    for(i=0;i<len_usertele;i++)  
+//	for(i=0;i<len_usertele*2;i++)
 	{
         sprintf(temp_p,"%c",usertele[i]);
        // sprintf(temp_p,"%02X",int(usertele[i]));   
@@ -1860,8 +1861,8 @@ Print_Log(str);
 		if((i+1)%16==0) str+="\n";
 	}
 	str+="\n\n";
-  // cout<<"After ..., i is "<<i<<endl; 
-  // cout<<"str is "<<str<<endl; 
+   cout<<"After ..., i is "<<i<<endl; 
+   cout<<"str is "<<str<<endl; 
 
 	Print_Log(str);
 
@@ -2418,8 +2419,8 @@ BOOL Analyse_Usertele_Info(byte usertele[],int len_usertele)
     for(i=0;i<len_usertele;i++)
       cout<<usertele[i];
 */
-
-	for(i=0;i<len_usertele*2;i++)
+   for(i=0;i<len_usertele;i++)
+//	for(i=0;i<len_usertele*2;i++)
 	{
         sprintf(temp_p,"%c",usertele[i]);
        // sprintf(temp_p,"%02X",int(usertele[i]));   

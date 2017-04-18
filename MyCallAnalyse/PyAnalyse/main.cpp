@@ -44,7 +44,7 @@ int len_usertele = 104;
   } 
   user_tele[j]='\0';
 
-  cout<<"对以下用户报文进行解析:"<<endl;
+  cout<<endl<<"对以下用户报文进行解析:"<<endl;
   cout<<user_tele<<endl;
     
   cout<<"解析结果:"<<endl;
